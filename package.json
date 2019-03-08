@@ -1,0 +1,32 @@
+{
+  "scripts": {
+    "web:start": "bluebase web:start",
+    "expo:start": "bluebase expo:start"
+  },
+  "dependencies": {
+    "@babel/core": "^7.3.4",
+    "@babel/runtime": "^7.3.4",
+    "compression": "^1.7.3",
+    "deepmerge": "^3.2.0",
+    "expo": "^31.0.0",
+    "react": "^16",
+    "react-dom": "^16.4.2",
+    "react-native": "^0.57.0",
+    "source-map-support": "^0.5.10",
+    "uuid": "^3.3.2"
+  },
+  "devDependencies": {
+    "@bluebase/core": "^4.0.0-aplha.10",
+    "@blueeast/tslint-config-blueeast": "^0.7.0",
+    "@types/compression": "^0.0.36",
+    "@types/deepmerge": "^2.2.0",
+    "@types/react": "^16.8.7",
+    "@types/react-native": "^0.57.38",
+    "@types/source-map-support": "^0.5.0",
+    "@types/uuid": "^3.4.4",
+    "babel-preset-bluebase": "^2.3.0",
+    "react-native-typescript-transformer": "^1.2.10",
+    "schedule": "0.4.0",
+    "typescript": "^3"
+  }
+}

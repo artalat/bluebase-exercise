@@ -16,6 +16,7 @@
     "uuid": "^3.3.2"
   },
   "devDependencies": {
+    "@bluebase/babel-preset-bluebase": "^2.4.1",
     "@bluebase/core": "^4.0.0-aplha.10",
     "@blueeast/tslint-config-blueeast": "^0.7.0",
     "@types/compression": "^0.0.36",

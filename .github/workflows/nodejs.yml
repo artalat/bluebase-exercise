@@ -1,4 +1,4 @@
-name: Node CI
+name: Production CI
 
 on: [push]
 
@@ -88,11 +88,19 @@ jobs:
           args: web:build --static
 
       - name: Deploy to Now
-        uses: actions/zeit-now@master
+        uses: primer/deploy@master
         with:
-          args: ./build/web/client
+          args: -- ./build/web/client
         env:
-          ZEIT_TOKEN: ${{ secrets.ZEIT_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          NOW_TOKEN: ${{ secrets.ZEIT_TOKEN }}
+
+      # - name: Deploy to Now
+      #   uses: actions/zeit-now@master
+      #   with:
+      #     args: ./build/web/client
+      #   env:
+      #     ZEIT_TOKEN: ${{ secrets.ZEIT_TOKEN }}
 
   deploy-expo:
     name: Deploy Expo
@@ -166,8 +174,14 @@ jobs:
         with:
           args: doc
 
-      - name: Deploy
-        uses: maxheld83/ghpages@v0.2.1
+      - name: deploy
+        uses: peaceiris/actions-gh-pages@v2.2.0
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          BUILD_DIR: 'docs'
+          PERSONAL_TOKEN: ${{ secrets.PERSONAL_TOKEN }}
+          PUBLISH_BRANCH: gh-pages
+          PUBLISH_DIR: ./docs
+      # - name: Deploy
+      #   uses: maxheld83/ghpages@v0.2.1
+      #   env:
+      #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      #     BUILD_DIR: 'docs'

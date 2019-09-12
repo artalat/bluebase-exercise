@@ -3,17 +3,17 @@ name: Node CI
 on: [push]
 
 jobs:
-  build:
+  test:
     runs-on: ubuntu-latest
 
     strategy:
       matrix:
-        node-version: [12.x]
+        node-version: [12]
 
     steps:
       - uses: actions/checkout@v1
 
-      - name: Use Node.js ${{ matrix.node-version }}
+      - name: Use Node.js ${{ matrix.node }}
         uses: actions/setup-node@v1
         with:
           node-version: ${{ matrix.node-version }}
@@ -23,13 +23,18 @@ jobs:
         with:
           args: install
 
-      - name: Jest
-        uses: docker://rkusa/jest-action:latest
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      # - name: Jest
+      #   uses: docker://rkusa/jest-action:latest
+      #   env:
+      #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      #   with:
+      #     args: --coverage --logHeapUsage
 
-        # with:
-        #   args: --coverage
+      - name: Unit Tests (Jest)
+        uses: Borales/actions-yarn@master
+        with:
+          args: test:only --coverage --logHeapUsage --ci
+
       - name: Test Lint
         uses: Borales/actions-yarn@master
         with:

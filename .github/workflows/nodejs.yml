@@ -1,0 +1,46 @@
+name: Node CI
+
+on: [push]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [12.x]
+
+    steps:
+      - uses: actions/checkout@v1
+
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node-version }}
+
+      - name: Install
+        uses: nuxt/actions-yarn@master
+        with:
+          args: install
+
+      - name: Jest
+        uses: rkusa/jest-action@master
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          args: --coverage --logHeapUsage
+
+      - name: Test Lint
+        uses: nuxt/actions-yarn@master
+        with:
+          args: test:lint
+
+      - name: Test Prettier
+        uses: nuxt/actions-yarn@master
+        with:
+          args: test:prettier
+
+      - name: Build
+        uses: nuxt/actions-yarn@master
+        with:
+          args: build

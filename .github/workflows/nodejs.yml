@@ -90,7 +90,7 @@ jobs:
       - name: Deploy to Now
         uses: actions/zeit-now@master
         with:
-          args: ./build/web
+          args: ./build/web/client
         env:
           ZEIT_TOKEN: ${{ secrets.ZEIT_TOKEN }}
 

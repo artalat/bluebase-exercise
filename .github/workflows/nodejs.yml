@@ -19,28 +19,28 @@ jobs:
           node-version: ${{ matrix.node-version }}
 
       - name: Install
-        uses: nuxt/actions-yarn@master
+        uses: Borales/actions-yarn@master
         with:
           args: install
 
       - name: Jest
-        uses: rkusa/jest-action@master
+        uses: docker://rkusa/jest-action:latest
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
         # with:
         #   args: --coverage
       - name: Test Lint
-        uses: nuxt/actions-yarn@master
+        uses: Borales/actions-yarn@master
         with:
           args: test:lint
 
       - name: Test Prettier
-        uses: nuxt/actions-yarn@master
+        uses: Borales/actions-yarn@master
         with:
           args: test:prettier
 
       - name: Build
-        uses: nuxt/actions-yarn@master
+        uses: Borales/actions-yarn@master
         with:
           args: build

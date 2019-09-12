@@ -12,12 +12,12 @@ jobs:
         node-version: [12]
 
     steps:
+      - uses: actions/checkout@v1
+
       - name: BlueBase
         uses: ./.github/actions/bluebase
         with:
           args: plugins:add @bluebase/cli-web
-
-      - uses: actions/checkout@v1
 
       - name: Use Node.js ${{ matrix.node }}
         uses: actions/setup-node@v1

@@ -27,9 +27,9 @@ jobs:
         uses: rkusa/jest-action@master
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          args: --coverage --logHeapUsage
 
+        # with:
+        #   args: --coverage
       - name: Test Lint
         uses: nuxt/actions-yarn@master
         with:

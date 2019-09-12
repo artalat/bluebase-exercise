@@ -55,7 +55,39 @@ jobs:
       #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       #     NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
 
-  deploy:
+  deploy-web:
+    name: Deploy Web
+    needs: test
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [12]
+
+    steps:
+      - uses: actions/checkout@v1
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node-version }}
+
+      - name: BlueBase
+        uses: ./.github/actions/bluebase
+        with:
+          args: plugins:add @bluebase/cli-web
+
+      - name: Install
+        uses: Borales/actions-yarn@master
+        with:
+          args: install
+
+      - name: Build Web
+        uses: ./.github/actions/bluebase
+        with:
+          args: web:build --static
+
+  deploy-docs:
     name: Deploy Docs
     needs: test
     runs-on: ubuntu-latest

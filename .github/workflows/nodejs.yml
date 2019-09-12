@@ -4,7 +4,7 @@ on: [push]
 
 jobs:
   test:
-    name: Test
+    name: Test, Build & Release
     runs-on: ubuntu-latest
 
     strategy:
@@ -19,45 +19,44 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
 
-      - name: BlueBase
-        uses: ./.github/actions/bluebase
-        with:
-          args: plugins:add @bluebase/cli-web
-
-      - name: Install
-        uses: Borales/actions-yarn@master
-        with:
-          args: install
-
-      # - name: Jest
-      #   uses: docker://rkusa/jest-action:latest
+      # # - name: BlueBase
+      # #   uses: ./.github/actions/bluebase
+      # #   with:
+      # #     args: plugins:add @bluebase/cli-web
+      # - name: Install
+      #   uses: Borales/actions-yarn@master
+      #   with:
+      #     args: install
+      # # - name: Jest
+      # #   uses: docker://rkusa/jest-action:latest
+      # #   env:
+      # #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      # #   with:
+      # #     args: --coverage --logHeapUsage
+      # - name: Unit Tests (Jest)
+      #   uses: Borales/actions-yarn@master
+      #   with:
+      #     args: test:only --coverage --logHeapUsage --ci
+      # - name: Test Lint
+      #   uses: Borales/actions-yarn@master
+      #   with:
+      #     args: test:lint
+      # - name: Test Prettier
+      #   uses: Borales/actions-yarn@master
+      #   with:
+      #     args: test:prettier
+      # - name: Build
+      #   uses: Borales/actions-yarn@master
+      #   with:
+      #     args: build
+      # - name: Semantic Release
+      #   run: npx semantic-release
       #   env:
       #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      #   with:
-      #     args: --coverage --logHeapUsage
-
-      - name: Unit Tests (Jest)
-        uses: Borales/actions-yarn@master
-        with:
-          args: test:only --coverage --logHeapUsage --ci
-
-      - name: Test Lint
-        uses: Borales/actions-yarn@master
-        with:
-          args: test:lint
-
-      - name: Test Prettier
-        uses: Borales/actions-yarn@master
-        with:
-          args: test:prettier
-
-      - name: Build
-        uses: Borales/actions-yarn@master
-        with:
-          args: build
+      #     NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
 
   deploy:
-    name: Deploy
+    name: Deploy Docs
     needs: test
     runs-on: ubuntu-latest
 
@@ -83,22 +82,15 @@ jobs:
         with:
           args: install
 
-      - name: Unit Tests (Jest)
+      - name: Build Docs
         uses: Borales/actions-yarn@master
         with:
-          args: test:only --coverage --logHeapUsage --ci
+          args: doc
 
-      - name: Test Lint
-        uses: Borales/actions-yarn@master
+      - name: Deploy
+        uses: maxheld83/ghpages@v0.2.1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          BUILD_DIR: 'docs'
         with:
           args: test:lint
-
-      - name: Test Prettier
-        uses: Borales/actions-yarn@master
-        with:
-          args: test:prettier
-
-      - name: Build
-        uses: Borales/actions-yarn@master
-        with:
-          args: build

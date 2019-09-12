@@ -65,10 +65,10 @@ jobs:
         node-version: [12]
 
     steps:
-      - name: Check if Master
-        uses: actions/bin/filter@master
-        with:
-          args: branch master
+      # - name: Check if Master
+      #   uses: actions/bin/filter@master
+      #   with:
+      #     args: branch master
 
       - uses: actions/checkout@v1
 

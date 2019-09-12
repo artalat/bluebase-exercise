@@ -1,4 +1,11 @@
 {
+  "size-limit": [
+    {
+      "limit": "4 KB",
+      "webpack": false,
+      "path": "dist/**/*.js"
+    }
+  ],
   "scripts": {
     "start": "yarn run storybook",
     "clean": "rimraf coverage dist tmp",
@@ -93,5 +100,10 @@
     "tslint": "5.11.0",
     "typedoc": "^0.14.2",
     "typescript": "3.3.3333"
+  },
+  "prettier": {
+    "singleQuote": true,
+    "useTabs": true,
+    "trailingComma": "es5"
   }
 }

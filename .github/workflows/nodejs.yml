@@ -4,6 +4,7 @@ on: [push]
 
 jobs:
   test:
+    name: Test
     runs-on: ubuntu-latest
 
     strategy:
@@ -29,6 +30,53 @@ jobs:
       #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       #   with:
       #     args: --coverage --logHeapUsage
+
+      - name: Unit Tests (Jest)
+        uses: Borales/actions-yarn@master
+        with:
+          args: test:only --coverage --logHeapUsage --ci
+
+      - name: Test Lint
+        uses: Borales/actions-yarn@master
+        with:
+          args: test:lint
+
+      - name: Test Prettier
+        uses: Borales/actions-yarn@master
+        with:
+          args: test:prettier
+
+      - name: Build
+        uses: Borales/actions-yarn@master
+        with:
+          args: build
+
+  deploy:
+    name: Deploy
+    needs: test
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [12]
+
+    steps:
+      - name: Check if Master
+        uses: actions/bin/filter@master
+        with:
+          args: branch master
+
+      - uses: actions/checkout@v1
+
+      - name: Use Node.js ${{ matrix.node }}
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node-version }}
+
+      - name: Install
+        uses: Borales/actions-yarn@master
+        with:
+          args: install
 
       - name: Unit Tests (Jest)
         uses: Borales/actions-yarn@master

@@ -11,6 +11,7 @@ LABEL "com.github.actions.icon"="upload-cloud"
 LABEL "com.github.actions.color"="blue"
 # COPY LICENSE README.md THIRD_PARTY_NOTICE.md /
 
+RUN apt-get install -y bzip2
 RUN yarn global add @bluebase/cli
 
 COPY entrypoint.sh /entrypoint.sh

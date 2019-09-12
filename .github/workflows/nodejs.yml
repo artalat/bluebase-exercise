@@ -87,6 +87,13 @@ jobs:
         with:
           args: web:build --static
 
+      - name: Deploy to Now
+        uses: actions/zeit-now@master
+        with:
+          args: ./build/web
+        env:
+          ZEIT_TOKEN: ${{ secrets.ZEIT_TOKEN }}
+
   deploy-docs:
     name: Deploy Docs
     needs: test

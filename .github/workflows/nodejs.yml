@@ -13,7 +13,7 @@ jobs:
 
     steps:
       - name: BlueBase
-        uses: ../actions/bluebase
+        uses: ./.github/actions/bluebase
         with:
           args: plugins:add @bluebase/cli-web
 

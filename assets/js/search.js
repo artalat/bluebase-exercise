@@ -1,0 +1,3 @@
+var typedoc = typedoc || {};
+            typedoc.search = typedoc.search || {};
+            typedoc.search.data = {"kinds":{"32":"Variable","64":"Function"},"rows":[{"id":0,"kind":32,"name":"H4","url":"globals.html#h4","classes":"tsd-kind-variable tsd-is-not-exported"},{"id":1,"kind":64,"name":"HelloScreen","url":"globals.html#helloscreen","classes":"tsd-kind-function"},{"id":2,"kind":64,"name":"withBackground","url":"globals.html#withbackground","classes":"tsd-kind-function"}]};

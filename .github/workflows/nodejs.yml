@@ -88,9 +88,7 @@ jobs:
           args: web:build --static
 
       - name: Copy now.json to Build Dir
-        uses: actions/bin/sh@master
-        with:
-          args: cp -f ./bluebase/web/now.json ./build/web/client
+        run: cp -f ./bluebase/web/now.json ./build/web/client
 
       - name: Deploy to Now
         uses: primer/deploy@master

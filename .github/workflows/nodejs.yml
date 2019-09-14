@@ -90,13 +90,13 @@ jobs:
       - name: Copy now.json to Build Dir
         run: sudo cp -f ./bluebase/web/now.json ./build/web/client
 
-      - name: Deploy to Now
-        uses: primer/deploy@master
-        with:
-          args: -- ./build/web/client
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          NOW_TOKEN: ${{ secrets.ZEIT_TOKEN }}
+      # - name: Deploy to Now
+      #   uses: primer/deploy@master
+      #   with:
+      #     args: -- ./build/web/client
+      #   env:
+      #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      #     NOW_TOKEN: ${{ secrets.ZEIT_TOKEN }}
 
       - name: Deploy to Now
         uses: actions/zeit-now@master

@@ -3,6 +3,7 @@
 	"dependencies": {
 		"@actions/core": "^1.1.0",
 		"@actions/github": "^1.1.0",
+		"humanize": "^0.0.9",
 		"now-client": "^5.1.3"
 	}
 }

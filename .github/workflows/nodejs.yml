@@ -98,12 +98,12 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NOW_TOKEN: ${{ secrets.ZEIT_TOKEN }}
 
-      # - name: Deploy to Now
-      #   uses: actions/zeit-now@master
-      #   with:
-      #     args: ./build/web/client
-      #   env:
-      #     ZEIT_TOKEN: ${{ secrets.ZEIT_TOKEN }}
+      - name: Deploy to Now
+        uses: actions/zeit-now@master
+        with:
+          args: ./build/web/client
+        env:
+          ZEIT_TOKEN: ${{ secrets.ZEIT_TOKEN }}
 
   deploy-expo:
     name: Deploy Expo

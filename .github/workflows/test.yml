@@ -19,6 +19,11 @@ jobs:
       #   with:
       #     node-version: ${{ matrix.node-version }}
 
+      - name: Install Dependencies
+        uses: Borales/actions-yarn@master
+        with:
+          args: install
+
       - name: Install BlueBase Web Plugin
         uses: ./.github/actions/bluebase
         with:
@@ -35,3 +40,4 @@ jobs:
         #   args: plugins:add @bluebase/cli-web
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          NOW_TOKEN: ${{ secrets.ZEIT_TOKEN }}

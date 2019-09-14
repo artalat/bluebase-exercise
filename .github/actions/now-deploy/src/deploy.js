@@ -1,6 +1,6 @@
 const { createDeployment } = require('now-client');
 const slugify = require('slugify');
-const { GITHUB_REPOSITORY_NAME } = require('./constants');
+const { GITHUB_REPOSITORY_NAME, NOW_TOKEN } = require('./constants');
 
 async function deploy() {
 	let deployment;
@@ -8,7 +8,7 @@ async function deploy() {
 	const name = slugify(GITHUB_REPOSITORY_NAME);
 
 	for await (const event of createDeployment('build/web/client', {
-		token: 'PePP7RTGA5sfArALVFyHkOjd',
+		token: NOW_TOKEN,
 		name,
 		alias: ['my-alias-123'],
 	})) {

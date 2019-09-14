@@ -3,7 +3,7 @@
 const { GITHUB_TOKEN, GITHUB_EVENT_NAME } = require('./src/constants');
 
 const githubEvent = require('./src/github-event');
-const run = require('./src/index');
+// const run = require('./src/index');
 
 if (!GITHUB_TOKEN) {
 	console.log('You must enable the GITHUB_TOKEN secret');

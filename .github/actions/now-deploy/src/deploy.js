@@ -18,6 +18,9 @@ async function deploy() {
 			deployment = event.payload;
 			break;
 		}
+		if (event.type === 'error') {
+			throw Error('Deployment to Now Failed!');
+		}
 	}
 
 	console.log('deployed at: ', deployment.url);

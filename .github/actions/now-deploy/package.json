@@ -1,6 +1,8 @@
 {
 	"name": "bluebase-action-now-deployment",
 	"dependencies": {
+		"@actions/core": "^1.1.0",
+		"@actions/github": "^1.1.0",
 		"now-client": "^5.1.3"
 	}
 }

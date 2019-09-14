@@ -1,0 +1,6 @@
+{
+	"name": "bluebase-action-now-deployment",
+	"dependencies": {
+		"now-client": "^5.1.3"
+	}
+}

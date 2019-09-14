@@ -1,0 +1,27 @@
+name: Debug
+
+on: [push]
+
+jobs:
+  test:
+    name: Test
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [12]
+
+    steps:
+      - uses: actions/checkout@v1
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node-version }}
+
+      - name: Now Deploy
+        uses: ./.github/actions/now-deploy
+        # with:
+        #   args: plugins:add @bluebase/cli-web
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

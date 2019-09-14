@@ -1,33 +1,38 @@
-const generateMarkdownReport = require('./github-markdown');
-const processImages = require('./image-processing');
-const createComment = require('./github-pr-comment');
-const createCommit = require('./github-commit');
+// const generateMarkdownReport = require('./github-markdown');
+// const processImages = require('./image-processing');
+// const createComment = require('./github-pr-comment');
+// const createCommit = require('./github-commit');
+const deploy = require('./deploy');
 
 const run = async () => {
-	console.log('->> Locating images…');
+	console.log('->> Deploying to Now…');
 
-	const results = await processImages();
+	await deploy();
 
-	const optimisedImages = results.images.filter(
-		img => img.compressionWasSignificant
-	);
+	// console.log('->> Locating images…');
 
-	// If nothing was optimised, bail out.
-	if (!optimisedImages.length) {
-		console.log('Nothing left to optimise. Stopping…');
-		return;
-	}
+	// const results = await processImages();
 
-	console.log('->> Generating markdown…');
-	const markdown = await generateMarkdownReport(results);
+	// const optimisedImages = results.images.filter(
+	// 	img => img.compressionWasSignificant
+	// );
 
-	console.log('->> Committing files…');
-	await createCommit(optimisedImages);
+	// // If nothing was optimised, bail out.
+	// if (!optimisedImages.length) {
+	// 	console.log('Nothing left to optimise. Stopping…');
+	// 	return;
+	// }
 
-	console.log('->> Leaving comment on PR…');
-	await createComment(markdown);
+	// console.log('->> Generating markdown…');
+	// const markdown = await generateMarkdownReport(results);
 
-	return results;
+	// console.log('->> Committing files…');
+	// await createCommit(optimisedImages);
+
+	// console.log('->> Leaving comment on PR…');
+	// await createComment(markdown);
+
+	// return results;
 };
 
 module.exports = run;

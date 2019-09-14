@@ -1,4 +1,5 @@
 {
+	"version": 2,
 	"name": "bluebase-exercise",
 	"alias": ["my-alias-123"]
 }

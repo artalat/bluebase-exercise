@@ -137,6 +137,12 @@ jobs:
         with:
           args: expo:build
 
+      - name: Increase watchers
+        run:
+          - echo fs.inotify.max_user_instances=524288 | sudo tee -a /etc/sysctl.conf && sudo sysctl -p
+          - echo fs.inotify.max_user_watches=524288 | sudo tee -a /etc/sysctl.conf && sudo sysctl -p
+          - echo fs.inotify.max_queued_events=524288 | sudo tee -a /etc/sysctl.conf && sudo sysct
+
       - name: Publish on Expo
         uses: expo/expo-github-action@3.0.0
         with:
@@ -180,7 +186,7 @@ jobs:
       - name: deploy
         uses: peaceiris/actions-gh-pages@v2.2.0
         env:
-          PERSONAL_TOKEN: ${{ secrets.PERSONAL_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           PUBLISH_BRANCH: gh-pages
           PUBLISH_DIR: ./docs
       # - name: Deploy

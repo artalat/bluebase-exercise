@@ -7,6 +7,8 @@ const GITHUB_REPOSITORY = process.env['GITHUB_REPOSITORY'];
 
 const REPO_DIRECTORY = process.env['GITHUB_WORKSPACE'];
 
+const GITHUB_BRANCH = process.env['GITHUB_REF'].substring(11);
+
 if (!REPO_DIRECTORY) {
 	console.log('There is no GITHUB_WORKSPACE environment variable');
 	process.exit(1);
@@ -19,5 +21,6 @@ module.exports = {
 	GITHUB_SHA,
 	GITHUB_REF,
 	GITHUB_REPOSITORY,
+	GITHUB_BRANCH,
 	REPO_DIRECTORY,
 };

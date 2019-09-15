@@ -31,8 +31,11 @@ const main = async () => {
 	// const event = await githubEvent();
 
 	// console.log('event', event);
-
-	await run();
+	try {
+		await run();
+	} catch (error) {
+		console.log('Error', error);
+	}
 };
 
 main();

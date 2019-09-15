@@ -15,6 +15,7 @@ const createDeployment = async deployment => {
 	return api.repos.createDeployment({
 		owner,
 		repo,
+		required_contexts: [],
 		ref: GITHUB_REF,
 		auto_merge: false,
 		...deployment,

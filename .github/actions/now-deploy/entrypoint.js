@@ -35,6 +35,7 @@ const main = async () => {
 		await run();
 	} catch (error) {
 		console.log('Error', error);
+		process.exit(1);
 	}
 };
 

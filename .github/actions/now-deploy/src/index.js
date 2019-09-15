@@ -34,7 +34,7 @@ const run = async () => {
 	} catch (error) {
 		console.log('->> Deployment Failed', error);
 		await createDeploymentStatus({
-			environment,
+			// environment,
 			state: 'error',
 			deployment_id: deployment.data.id,
 			description: error.message,

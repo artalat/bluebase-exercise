@@ -9,6 +9,7 @@ const {
 	EXPO_CLI_PASSWORD,
 } = require('./constants');
 const exec = require('@actions/exec');
+const { extractBundleUrl } = require('./extract-url');
 
 const publish = async () => {
 	const environment = GITHUB_DEPLOYMENT_ENVIORNMENT;
@@ -64,22 +65,22 @@ const publish = async () => {
 
 		// const response = await deploy();
 
-		// const url = `https://${response.url}`;
+		const url = extractBundleUrl(myOutput);
 
-		// console.log('->> Creating GitHub Deployment Status…');
-		// await createDeploymentStatus({
-		// 	environment,
-		// 	state: 'success',
-		// 	deployment_id: deployment.data.id,
-		// 	environment_url: url,
-		// 	description: 'Deployment finished successfully.',
-		// });
+		console.log('->> Creating GitHub Deployment Status…');
+		await createDeploymentStatus({
+			// environment,
+			state: 'success',
+			deployment_id: deployment.data.id,
+			environment_url: url,
+			description: 'Deployment finished successfully.',
+		});
 
 		// core.setOutput('url', url);
 	} catch (error) {
 		console.log('->> Deployment Failed', error);
 		await createDeploymentStatus({
-			environment,
+			// environment,
 			state: 'error',
 			deployment_id: deployment.data.id,
 			description: error.message,

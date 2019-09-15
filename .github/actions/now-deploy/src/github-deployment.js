@@ -1,11 +1,6 @@
 const api = require('./github-api');
 const githubEvent = require('./github-event');
-const {
-	GITHUB_BRANCH,
-	GITHUB_REF,
-	// GITHUB_REPOSITORY_ORG,
-	// GITHUB_REPOSITORY_NAME,
-} = require('./constants');
+const { GITHUB_BRANCH } = require('./constants');
 
 const createDeployment = async deployment => {
 	const event = await githubEvent();

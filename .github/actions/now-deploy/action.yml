@@ -1,13 +1,13 @@
 name: 'Now Deploy'
-description: 'Greet someone and record the time'
-inputs:
-  who-to-greet: # id of input
-    description: 'Who to greet'
-    required: true
-    default: 'World'
+description: 'Deploys a project to Now'
+# inputs:
+#   who-to-greet: # id of input
+#     description: 'Who to greet'
+#     required: true
+#     default: 'World'
 outputs:
-  time: # id of output
-    description: 'The time we greeted you'
+  url:
+    description: 'The url of the deployment'
 runs:
   using: 'node12'
   main: 'entrypoint.js'

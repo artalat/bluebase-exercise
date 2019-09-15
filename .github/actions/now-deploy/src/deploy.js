@@ -1,6 +1,11 @@
 const { createDeployment } = require('now-client');
 const slugify = require('slugify');
-const { GITHUB_REPOSITORY_NAME, NOW_TOKEN } = require('./constants');
+const {
+	GITHUB_REPOSITORY_NAME,
+	NOW_TOKEN,
+	NOW_TARGET,
+	NOW_CONFIGS,
+} = require('./constants');
 
 async function deploy() {
 	let deployment;
@@ -9,11 +14,11 @@ async function deploy() {
 
 	for await (const event of createDeployment('build/web/client', {
 		token: NOW_TOKEN,
+		target: NOW_TARGET,
 		name,
-		alias: ['my-alias-123'],
+		...NOW_CONFIGS,
+		// alias: ['my-alias-123'],
 	})) {
-		console.log('event', event);
-		console.log('-------------------');
 		if (event.type === 'ready') {
 			deployment = event.payload;
 			break;
@@ -23,7 +28,6 @@ async function deploy() {
 		}
 	}
 
-	console.log('deployed at: ', deployment.url);
 	return deployment;
 }
 

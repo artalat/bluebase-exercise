@@ -6706,6 +6706,11 @@ gh-pages@^2.0.1, gh-pages@^2.1.1:
     graceful-fs "^4.1.11"
     rimraf "^2.6.2"
 
+github-action-meta@^0.1.2:
+  version "0.1.2"
+  resolved "https://registry.yarnpkg.com/github-action-meta/-/github-action-meta-0.1.2.tgz#053af50c201bc0b777b113de0a0e3961c2ad925e"
+  integrity sha512-zyMbea3LYQ/oOlyn/JyD7Dqg6Sw+d9y3aEn9AZw3COoxANe6htolvjbDopUIRFY08idaE2jCgDj5wM/xvOe7qQ==
+
 glob-base@^0.3.0:
   version "0.3.0"
   resolved "https://registry.yarnpkg.com/glob-base/-/glob-base-0.3.0.tgz#dbb164f6221b1c0b1ccf82aea328b497df0ea3c4"
@@ -7469,6 +7474,11 @@ inquirer@^3.0.6:
     string-width "^2.1.0"
     strip-ansi "^4.0.0"
     through "^2.3.6"
+
+interpolate@^0.1.0:
+  version "0.1.0"
+  resolved "https://registry.yarnpkg.com/interpolate/-/interpolate-0.1.0.tgz#b60177a4ba941fb3724c821905d99aade13d1df9"
+  integrity sha1-tgF3pLqUH7NyTIIZBdmareE9Hfk=
 
 interpret@^1.0.0:
   version "1.2.0"

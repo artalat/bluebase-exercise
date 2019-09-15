@@ -27,10 +27,9 @@ const createDeploymentStatus = async status => {
 	const owner = event.repository.owner.login;
 	const repo = event.repository.name;
 
-	return api.repos.createDeployment({
+	return api.repos.createDeploymentStatus({
 		owner,
 		repo,
-		ref: GITHUB_BRANCH,
 		...status,
 	});
 };

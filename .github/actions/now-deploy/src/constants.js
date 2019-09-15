@@ -1,4 +1,5 @@
 const meta = require('github-action-meta');
+const core = require('@actions/core');
 
 const NOW_TOKEN = process.env['NOW_TOKEN'];
 const GITHUB_TOKEN = process.env['GITHUB_TOKEN'];

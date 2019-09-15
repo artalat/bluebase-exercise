@@ -4,6 +4,7 @@ const {
 } = require('./github-deployment');
 const deploy = require('./deploy');
 const { GITHUB_DEPLOYMENT_ENVIORNMENT } = require('./constants');
+const core = require('@actions/core');
 
 const run = async () => {
 	const environment = GITHUB_DEPLOYMENT_ENVIORNMENT;

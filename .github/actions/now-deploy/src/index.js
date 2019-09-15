@@ -17,6 +17,8 @@ const run = async () => {
 		description: 'Web Project',
 	});
 
+	console.log('depl', deployment);
+
 	console.log('->> Creating GitHub Deployment Status…');
 	await createDeploymentStatus(deployment.id, {
 		environment,

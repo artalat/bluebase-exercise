@@ -2,6 +2,11 @@
 # yarn lockfile v1
 
 
+"@actions/core@^1.1.0":
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/@actions/core/-/core-1.1.0.tgz#25c3aff43a20f9c5a04e2a3439898a49ba8d3625"
+  integrity sha512-KKpo3xzo0Zsikni9tbOsEQkxZBGDsYSJZNkTvmo0gPSXrc98TBOcdTvKwwjitjkjHkreTggWdB1ACiAFVgsuzA==
+
 "@babel/cli@^7.2.3":
   version "7.6.0"
   resolved "https://registry.yarnpkg.com/@babel/cli/-/cli-7.6.0.tgz#1470a04394eaf37862989ea4912adf440fa6ff8d"
@@ -6710,6 +6715,9 @@ github-action-meta@^0.1.2:
   version "0.1.2"
   resolved "https://registry.yarnpkg.com/github-action-meta/-/github-action-meta-0.1.2.tgz#053af50c201bc0b777b113de0a0e3961c2ad925e"
   integrity sha512-zyMbea3LYQ/oOlyn/JyD7Dqg6Sw+d9y3aEn9AZw3COoxANe6htolvjbDopUIRFY08idaE2jCgDj5wM/xvOe7qQ==
+  dependencies:
+    interpolate "^0.1.0"
+    yargs "^12.0.5"
 
 glob-base@^0.3.0:
   version "0.3.0"
@@ -7474,11 +7482,6 @@ inquirer@^3.0.6:
     string-width "^2.1.0"
     strip-ansi "^4.0.0"
     through "^2.3.6"
-
-interpolate@^0.1.0:
-  version "0.1.0"
-  resolved "https://registry.yarnpkg.com/interpolate/-/interpolate-0.1.0.tgz#b60177a4ba941fb3724c821905d99aade13d1df9"
-  integrity sha1-tgF3pLqUH7NyTIIZBdmareE9Hfk=
 
 interpret@^1.0.0:
   version "1.2.0"

@@ -67,10 +67,10 @@ jobs:
     steps:
       - uses: actions/checkout@v1
 
-      - name: Setup Node.js
-        uses: actions/setup-node@v1
-        with:
-          node-version: ${{ matrix.node-version }}
+      # - name: Setup Node.js
+      #   uses: actions/setup-node@v1
+      #   with:
+      #     node-version: ${{ matrix.node-version }}
 
       - name: Install Dependencies
         uses: Borales/actions-yarn@master
@@ -87,23 +87,11 @@ jobs:
         with:
           args: web:build --static
 
-      - name: Copy now.json to Build Dir
-        run: cp ./bluebase/web/now.json ./build/web/client
-
-      - name: Deploy to Now
-        uses: primer/deploy@master
-        with:
-          args: -- ./build/web/client
+      - name: Deploy To Now
+        uses: ./.github/actions/now-deploy
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NOW_TOKEN: ${{ secrets.ZEIT_TOKEN }}
-
-      # - name: Deploy to Now
-      #   uses: actions/zeit-now@master
-      #   with:
-      #     args: ./build/web/client
-      #   env:
-      #     ZEIT_TOKEN: ${{ secrets.ZEIT_TOKEN }}
 
   deploy-expo:
     name: Deploy Expo
@@ -136,6 +124,12 @@ jobs:
         uses: ./.github/actions/bluebase
         with:
           args: expo:build
+
+      - name: Increase watchers
+        run: |
+          echo fs.inotify.max_user_instances=524288 | sudo tee -a /etc/sysctl.conf && sudo sysctl -p
+          echo fs.inotify.max_user_watches=524288 | sudo tee -a /etc/sysctl.conf && sudo sysctl -p
+          echo fs.inotify.max_queued_events=524288 | sudo tee -a /etc/sysctl.conf && sudo sysctl -p
 
       - name: Publish on Expo
         uses: expo/expo-github-action@3.0.0

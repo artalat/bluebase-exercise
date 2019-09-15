@@ -50,6 +50,7 @@
 		"react-native": "^0.59.8"
 	},
 	"devDependencies": {
+		"@actions/core": "^1.1.0",
 		"@babel/cli": "^7.2.3",
 		"@babel/core": "^7.3.4",
 		"@bluebase/babel-preset-bluebase": "^2.4.1",

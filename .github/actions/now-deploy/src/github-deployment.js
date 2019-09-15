@@ -15,14 +15,14 @@ const createDeployment = async deployment => {
 	return api.repos.createDeployment({
 		owner,
 		repo,
-		required_contexts: [],
 		ref: GITHUB_BRANCH,
+		required_contexts: [],
 		auto_merge: false,
 		...deployment,
 	});
 };
 
-const createDeploymentStatus = async (deployment_id, status) => {
+const createDeploymentStatus = async status => {
 	const event = await githubEvent();
 	const owner = event.repository.owner.login;
 	const repo = event.repository.name;
@@ -30,7 +30,7 @@ const createDeploymentStatus = async (deployment_id, status) => {
 	return api.repos.createDeployment({
 		owner,
 		repo,
-		deployment_id,
+		ref: GITHUB_BRANCH,
 		...status,
 	});
 };

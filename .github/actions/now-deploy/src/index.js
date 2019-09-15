@@ -20,9 +20,10 @@ const run = async () => {
 	console.log('depl', deployment);
 
 	console.log('->> Creating GitHub Deployment Status…');
-	await createDeploymentStatus(deployment.data.id, {
+	await createDeploymentStatus({
 		environment,
 		state: 'in_progress',
+		deployment_id: deployment.data.id,
 		// log_url: 'https://example.com/deployment/42/output',
 		description: 'Deployment finished successfully.',
 	});
@@ -35,6 +36,7 @@ const run = async () => {
 		await createDeploymentStatus(deployment.id, {
 			environment,
 			state: 'error',
+			deployment_id: deployment.data.id,
 			// log_url: 'https://example.com/deployment/42/output',
 			description: error.message,
 		});

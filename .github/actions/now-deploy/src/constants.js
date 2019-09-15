@@ -28,7 +28,7 @@ if (GITHUB_BRANCH === 'staging') {
 	GITHUB_DEPLOYMENT_ENVIORNMENT = 'web-production';
 }
 
-let NOW_TARGET = null;
+let NOW_TARGET;
 
 if (GITHUB_BRANCH === 'staging') {
 	NOW_TARGET = 'staging';

@@ -19,21 +19,21 @@ const run = async () => {
 
 	console.log('depl', deployment);
 
-	console.log('->> Creating GitHub Deployment Status…');
-	await createDeploymentStatus({
-		environment,
-		state: 'in_progress',
-		deployment_id: deployment.data.id,
-		// log_url: 'https://example.com/deployment/42/output',
-		description: 'Deployment finished successfully.',
-	});
-
 	try {
 		console.log('->> Deploying to Now…');
 		await deploy();
+
+		console.log('->> Creating GitHub Deployment Status…');
+		await createDeploymentStatus({
+			environment,
+			state: 'in_progress',
+			deployment_id: deployment.data.id,
+			// log_url: 'https://example.com/deployment/42/output',
+			description: 'Deployment finished successfully.',
+		});
 	} catch (error) {
 		console.log('->> Deployment Failed', error);
-		await createDeploymentStatus(deployment.id, {
+		await createDeploymentStatus({
 			environment,
 			state: 'error',
 			deployment_id: deployment.data.id,

@@ -1,10 +1,10 @@
 name: 'Now Deploy'
 description: 'Deploys a project to Now'
-# inputs:
-#   who-to-greet: # id of input
-#     description: 'Who to greet'
-#     required: true
-#     default: 'World'
+inputs:
+  command: # id of input
+    description: 'Expo Command to execute'
+    required: true
+    default: 'publish'
 outputs:
   url:
     description: 'The url of the deployment'

@@ -16,8 +16,8 @@ async function deploy() {
 		token: NOW_TOKEN,
 		target: NOW_TARGET,
 		name,
+		alias: [name],
 		...NOW_CONFIGS,
-		// alias: ['my-alias-123'],
 	})) {
 		if (event.type === 'ready') {
 			deployment = event.payload;

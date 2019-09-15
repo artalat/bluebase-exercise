@@ -49,7 +49,8 @@
 		"deepmerge": "^3.2.0",
 		"expo": "^33.0.0",
 		"gh-release-assets": "^1.1.2",
-		"react-native": "^0.59.8"
+		"react-native": "^0.59.8",
+		"siwi-file": "^1.0.3"
 	},
 	"devDependencies": {
 		"@actions/core": "^1.1.0",

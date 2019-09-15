@@ -1,4 +1,4 @@
-const meta = require('github-action-meta');
+// const meta = require('github-action-meta');
 const core = require('@actions/core');
 
 const NOW_TOKEN = process.env['NOW_TOKEN'];
@@ -11,10 +11,9 @@ const GITHUB_REF = process.env['GITHUB_REF'];
 const GITHUB_REPOSITORY = process.env['GITHUB_REPOSITORY'];
 const REPO_DIRECTORY = process.env['GITHUB_WORKSPACE'];
 
-const GITHUB_REPOSITORY_OWNER = meta.git.owner;
-const GITHUB_REPOSITORY_NAME = meta.git.name;
-const GITHUB_BRANCH = meta.git.branch;
-console.log('github-action-meta', meta);
+const GITHUB_REPOSITORY_OWNER = GITHUB_REPOSITORY.split('/')[0]; // meta.git.owner;
+const GITHUB_REPOSITORY_NAME = GITHUB_REPOSITORY.split('/')[1]; // meta.git.name;
+const GITHUB_BRANCH = process.env['GITHUB_REF'].substring(11); //meta.git.branch;
 
 if (!REPO_DIRECTORY) {
 	console.log('There is no GITHUB_WORKSPACE environment variable');

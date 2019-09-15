@@ -55,7 +55,7 @@ jobs:
       #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       #     NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
 
-  deploy-web:
+  web-deploy:
     name: Deploy Web
     needs: test
     runs-on: ubuntu-latest
@@ -93,8 +93,8 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NOW_TOKEN: ${{ secrets.ZEIT_TOKEN }}
 
-  publish-expo:
-    name: Publish Expo
+  expo-publish:
+    name: Expo Publish
     needs: test
     runs-on: ubuntu-latest
 
@@ -139,8 +139,8 @@ jobs:
           EXPO_CLI_USERNAME: ${{ secrets.EXPO_CLI_USERNAME }}
           EXPO_CLI_PASSWORD: ${{ secrets.EXPO_CLI_PASSWORD }}
 
-  build-expo-android:
-    name: Build Expo Android
+  expo-build-android:
+    name: Expo BUild Android
     needs: test
     runs-on: ubuntu-latest
 

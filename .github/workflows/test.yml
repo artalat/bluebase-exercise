@@ -24,15 +24,15 @@ jobs:
         with:
           args: install
 
-      # - name: Install BlueBase Web Plugin
-      #   uses: ./.github/actions/bluebase
-      #   with:
-      #     args: plugins:add @bluebase/cli-web
+      - name: Install BlueBase Web Plugin
+        uses: ./.github/actions/bluebase
+        with:
+          args: plugins:add @bluebase/cli-web
 
-      # - name: Build Web
-      #   uses: ./.github/actions/bluebase
-      #   with:
-      #     args: web:build --static
+      - name: Build Web
+        uses: ./.github/actions/bluebase
+        with:
+          args: web:build --static
 
       - name: Now Deploy
         uses: ./.github/actions/now-deploy

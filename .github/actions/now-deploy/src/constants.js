@@ -14,6 +14,7 @@ const REPO_DIRECTORY = process.env['GITHUB_WORKSPACE'];
 const GITHUB_REPOSITORY_OWNER = meta.git.owner;
 const GITHUB_REPOSITORY_NAME = meta.git.name;
 const GITHUB_BRANCH = meta.git.branch;
+console.log('github-action-meta', meta);
 
 if (!REPO_DIRECTORY) {
 	console.log('There is no GITHUB_WORKSPACE environment variable');

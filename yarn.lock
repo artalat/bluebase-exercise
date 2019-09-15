@@ -7483,6 +7483,11 @@ inquirer@^3.0.6:
     strip-ansi "^4.0.0"
     through "^2.3.6"
 
+interpolate@^0.1.0:
+  version "0.1.0"
+  resolved "https://registry.yarnpkg.com/interpolate/-/interpolate-0.1.0.tgz#b60177a4ba941fb3724c821905d99aade13d1df9"
+  integrity sha1-tgF3pLqUH7NyTIIZBdmareE9Hfk=
+
 interpret@^1.0.0:
   version "1.2.0"
   resolved "https://registry.yarnpkg.com/interpret/-/interpret-1.2.0.tgz#d5061a6224be58e8083985f5014d844359576296"

@@ -36,6 +36,7 @@ const run = async () => {
 			// log_url: 'https://example.com/deployment/42/output',
 			description: error.message,
 		});
+		process.exit(1);
 	}
 
 	// console.log('->> Locating images…');

@@ -16,7 +16,7 @@ const createDeployment = async deployment => {
 		owner,
 		repo,
 		required_contexts: [],
-		ref: GITHUB_REF,
+		ref: GITHUB_BRANCH,
 		auto_merge: false,
 		...deployment,
 	});

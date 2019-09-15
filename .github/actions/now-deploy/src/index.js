@@ -23,7 +23,7 @@ const run = async () => {
 
 		console.log('->> Creating GitHub Deployment Status…');
 		await createDeploymentStatus({
-			environment,
+			// environment,
 			state: 'success',
 			deployment_id: deployment.data.id,
 			environment_url: url,

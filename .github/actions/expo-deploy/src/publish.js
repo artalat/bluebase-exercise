@@ -56,12 +56,12 @@ const publish = async () => {
 			options
 		);
 
+		console.log('myError!!!', myError);
+		console.log('output!!!', myOutput);
 		if (myError) {
-			console.log('myError!!!', myError);
 			throw Error(myError);
 		}
 
-		console.log('output!!!', myOutput);
 		// const response = await deploy();
 
 		// const url = `https://${response.url}`;

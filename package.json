@@ -51,6 +51,7 @@
 	},
 	"devDependencies": {
 		"@actions/core": "^1.1.0",
+		"@actions/exec": "^1.0.1",
 		"@babel/cli": "^7.2.3",
 		"@babel/core": "^7.3.4",
 		"@bluebase/babel-preset-bluebase": "^2.4.1",
@@ -92,6 +93,7 @@
 		"enzyme": "^3.9.0",
 		"enzyme-adapter-react-16": "^1.10.0",
 		"enzyme-async-helpers": "^0.9.1",
+		"expo-cli": "^3.0.10",
 		"gh-pages": "^2.0.1",
 		"github-action-meta": "^0.1.2",
 		"humanize": "^0.0.9",

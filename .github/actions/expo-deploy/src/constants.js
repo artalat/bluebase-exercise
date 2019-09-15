@@ -1,7 +1,8 @@
 // const meta = require('github-action-meta');
-const core = require('@actions/core');
+const slugify = require('slugify');
 
-const NOW_TOKEN = process.env['NOW_TOKEN'];
+const EXPO_CLI_USERNAME = process.env['EXPO_CLI_USERNAME'];
+const EXPO_CLI_PASSWORD = process.env['EXPO_CLI_PASSWORD'];
 const GITHUB_TOKEN = process.env['GITHUB_TOKEN'];
 
 const GITHUB_EVENT_NAME = process.env['GITHUB_EVENT_NAME'];
@@ -20,28 +21,26 @@ if (!REPO_DIRECTORY) {
 	process.exit(1);
 }
 
-let GITHUB_DEPLOYMENT_ENVIORNMENT = 'web-dev';
+let GITHUB_DEPLOYMENT_ENVIORNMENT = 'expo-dev';
 
 if (GITHUB_BRANCH === 'staging') {
-	GITHUB_DEPLOYMENT_ENVIORNMENT = 'web-staging';
+	GITHUB_DEPLOYMENT_ENVIORNMENT = 'expo-staging';
 } else if (GITHUB_BRANCH === 'master') {
-	GITHUB_DEPLOYMENT_ENVIORNMENT = 'web-production';
+	GITHUB_DEPLOYMENT_ENVIORNMENT = 'expo-production';
 }
 
-let NOW_TARGET = null;
+let EXPO_RELEASE_CHANNEL = slugify(GITHUB_BRANCH);
 
 if (GITHUB_BRANCH === 'staging') {
-	NOW_TARGET = 'staging';
+	EXPO_RELEASE_CHANNEL = 'staging';
 } else if (GITHUB_BRANCH === 'master') {
-	NOW_TARGET = 'production';
+	EXPO_RELEASE_CHANNEL = 'production';
 }
-
-const NOW_CONFIGS = JSON.parse(core.getInput('configs') || '{}');
 
 module.exports = {
-	NOW_TOKEN,
-	NOW_TARGET,
-	NOW_CONFIGS,
+	EXPO_CLI_USERNAME,
+	EXPO_CLI_PASSWORD,
+	EXPO_RELEASE_CHANNEL,
 	GITHUB_DEPLOYMENT_ENVIORNMENT,
 	GITHUB_TOKEN,
 	GITHUB_EVENT_NAME,

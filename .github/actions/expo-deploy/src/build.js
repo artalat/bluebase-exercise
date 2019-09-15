@@ -9,32 +9,31 @@ const {
 	EXPO_CLI_PASSWORD,
 } = require('./constants');
 const exec = require('@actions/exec');
-const { extractBundleUrl } = require('./extract-url');
-const core = require('@actions/core');
+const { extractAppFileUrl } = require('./extract-url');
 
 const publish = async () => {
-	const environment = GITHUB_DEPLOYMENT_ENVIORNMENT;
+	// const environment = GITHUB_DEPLOYMENT_ENVIORNMENT;
 
-	console.log('->> Creating GitHub Deployment…');
-	const deployment = await createDeployment({
-		environment,
-		description: 'Expo Project',
-	});
+	// console.log('->> Creating GitHub Deployment…');
+	// const deployment = await createDeployment({
+	// 	environment,
+	// 	description: 'Expo Project',
+	// });
 
 	try {
 		console.log('->> Publishing app bundle on Expo…');
 
-		let output = '';
-		// let myError = '';
+		let myOutput = '';
+		let myError = '';
 
 		const options = {};
 		options.listeners = {
 			stdout: data => {
-				output += data.toString();
+				myOutput += data.toString();
 			},
-			// stderr: data => {
-			// 	myError += data.toString();
-			// },
+			stderr: data => {
+				myError += data.toString();
+			},
 		};
 
 		await exec.exec('./node_modules/.bin/expo', [
@@ -48,7 +47,7 @@ const publish = async () => {
 		await exec.exec(
 			'./node_modules/.bin/expo',
 			[
-				'publish',
+				'build:android',
 				'--release-channel',
 				EXPO_RELEASE_CHANNEL,
 				'--config',
@@ -57,22 +56,26 @@ const publish = async () => {
 			options
 		);
 
-		const url = extractBundleUrl(output);
-
-		if (!url) {
-			throw Error('Could not publish build on expo!');
+		console.log('myError!!!', myError);
+		console.log('output!!!', myOutput);
+		if (myError) {
+			throw Error(myError);
 		}
 
-		console.log('->> Creating GitHub Deployment Status…');
-		await createDeploymentStatus({
-			// environment,
-			state: 'success',
-			deployment_id: deployment.data.id,
-			environment_url: url,
-			description: 'Deployment finished successfully.',
-		});
+		// const response = await deploy();
 
-		core.setOutput('url', url);
+		const url = extractAppFileUrl(myOutput);
+
+		// console.log('->> Creating GitHub Deployment Status…');
+		// await createDeploymentStatus({
+		// 	// environment,
+		// 	state: 'success',
+		// 	deployment_id: deployment.data.id,
+		// 	environment_url: url,
+		// 	description: 'Deployment finished successfully.',
+		// });
+
+		// core.setOutput('url', url);
 	} catch (error) {
 		console.log('->> Deployment Failed', error);
 		await createDeploymentStatus({

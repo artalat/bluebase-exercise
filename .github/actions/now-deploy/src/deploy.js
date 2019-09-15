@@ -12,8 +12,8 @@ async function deploy() {
 		name,
 		alias: ['my-alias-123'],
 	})) {
-		// console.log('event', event);
-		// console.log('-------------------');
+		console.log('event', event);
+		console.log('-------------------');
 		if (event.type === 'ready') {
 			deployment = event.payload;
 			break;

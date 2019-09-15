@@ -2,12 +2,41 @@
 // const processImages = require('./image-processing');
 // const createComment = require('./github-pr-comment');
 // const createCommit = require('./github-commit');
+const {
+	createDeployment,
+	createDeploymentStatus,
+} = require('./github-deployment');
 const deploy = require('./deploy');
 
 const run = async () => {
-	console.log('->> Deploying to Now…');
+	const environment = 'staging';
 
-	await deploy();
+	console.log('->> Creating GitHub Deployment…');
+	const deployment = await createDeployment({
+		environment,
+		description: 'Web Project',
+	});
+
+	console.log('->> Creating GitHub Deployment Status…');
+	await createDeploymentStatus(deployment.id, {
+		environment,
+		state: 'in_progress',
+		// log_url: 'https://example.com/deployment/42/output',
+		description: 'Deployment finished successfully.',
+	});
+
+	try {
+		console.log('->> Deploying to Now…');
+		await deploy();
+	} catch (error) {
+		console.log('->> Deployment Failed', error);
+		await createDeploymentStatus(deployment.id, {
+			environment,
+			state: 'error',
+			// log_url: 'https://example.com/deployment/42/output',
+			description: error.message,
+		});
+	}
 
 	// console.log('->> Locating images…');
 

@@ -19,7 +19,7 @@ async function deploy() {
 			break;
 		}
 		if (event.type === 'error') {
-			throw Error('Deployment to Now Failed!');
+			throw Error(event.payload.message);
 		}
 	}
 

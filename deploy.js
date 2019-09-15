@@ -4,7 +4,7 @@ async function deploy() {
 	let deployment;
 
 	for await (const event of createDeployment('build/web/client', {
-		token: 'PePP7RTGA5sfArALVFyHkOjd',
+		token: 'gwzDeP7XBBvZBnWOxDO2vJxa',
 		name: 'bluebase-exercise',
 		alias: ['my-alias-123'],
 	})) {

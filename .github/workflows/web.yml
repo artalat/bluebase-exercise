@@ -35,7 +35,7 @@ jobs:
           args: web:build --static
 
       - name: Now Deploy
-        uses: ./.github/actions/now-deploy
+        uses: BlueBaseJS/now-deploy-github-action@master
         # with:
         #   args: plugins:add @bluebase/cli-web
         env:

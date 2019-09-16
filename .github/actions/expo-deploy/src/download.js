@@ -15,7 +15,7 @@ async function download(uri, filename) {
 			.get(uri, function(response) {
 				if (response.statusCode >= 200 && response.statusCode < 300) {
 					console.log('now downloading', uri);
-					downloadFile(uri, 'app.apk')
+					downloadFile(uri, filename)
 						.then(resolve)
 						.catch(reject);
 				} else if (response.headers.location) {

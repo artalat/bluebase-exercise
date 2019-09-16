@@ -5,7 +5,7 @@ const {
 } = require('./constants');
 const exec = require('@actions/exec');
 const { extractAppFileUrl } = require('./extract-url');
-const { uploadReleaseAsset } = require('./github-upload-release-asset');
+const uploadReleaseAsset = require('./github-upload-release-asset');
 const core = require('@actions/core');
 
 const build = async platform => {
@@ -54,7 +54,7 @@ const build = async platform => {
 		);
 
 		// console.log('myError!!!', myError);
-		console.log('output!!!', output);
+		// console.log('output!!!', output);
 		// if (myError) {
 		// 	throw Error(myError);
 		// }

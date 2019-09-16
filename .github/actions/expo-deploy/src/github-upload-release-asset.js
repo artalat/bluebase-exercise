@@ -65,4 +65,5 @@ const getVersion = () => {
 
 	return pkg.version;
 };
+
 module.exports = uploadReleaseAsset;

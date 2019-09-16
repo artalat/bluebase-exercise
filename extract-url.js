@@ -47,3 +47,11 @@ var urlRegex = /\bhttps?:\/\/expo.io\/artifacts\S+/gi;
 var urls = text.match(urlRegex);
 
 console.log(urls);
+
+const download = require('./.github/actions/expo-deploy/src/download');
+
+const uri = 'https://expo.io/artifacts/6740822a-7010-4e1b-9247-816588219921';
+
+// download(url, 'app.apk').catch(e => console.log('err', e));
+
+download(uri, 'app.apk');

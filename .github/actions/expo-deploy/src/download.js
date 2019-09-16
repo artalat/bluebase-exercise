@@ -1,6 +1,8 @@
 var url = require('url');
 const fs = require('fs');
-const file = require('siwi-file').file;
+const https = require('https');
+const path = require('path');
+const parseUrl = require('url').parse;
 
 /**
  * Downloads a file from a url. Follows redirects if required
@@ -11,16 +13,14 @@ async function download(uri, filename) {
 	console.log('returning promise');
 	return new Promise((resolve, reject) => {
 		console.log('inside promise');
-		var protocol = url.parse(uri).protocol.slice(0, -1);
-		var onError = function(e) {
-			fs.unlink(filename);
-			reject(e);
-		};
-		require(protocol)
+
+		https
 			.get(uri, function(response) {
 				if (response.statusCode >= 200 && response.statusCode < 300) {
 					console.log('now downloading', uri);
-					file(uri, 'app.apk').catch(e => console.log('err', e));
+					downloadFile(uri, 'app.apk')
+						.then(resolve)
+						.catch(reject);
 				} else if (response.headers.location) {
 					console.log('whoops we were redirected', response.headers.location);
 					resolve(download(response.headers.location, filename));
@@ -29,7 +29,55 @@ async function download(uri, filename) {
 					reject(new Error(response.statusCode + ' ' + response.statusMessage));
 				}
 			})
-			.on('error', onError);
+			.on('error', reject);
+	});
+}
+
+/**
+ * Downloads a file from a url. Follows redirects if required
+ * @param {*} uri
+ * @param {*} filename
+ */
+async function downloadFile(uri, filename) {
+	console.log('returning promise');
+	return new Promise((resolve, reject) => {
+		const file = fs.createWriteStream(dest);
+
+		https
+			.get(url, res => {
+				if (res.statusCode !== 200) {
+					return callback('File is not found');
+				}
+
+				const len = parseInt(res.headers['content-length'], 10);
+
+				let dowloaded = 0;
+
+				res.pipe(file);
+				res
+					.on('data', chunk => {
+						dowloaded += chunk.length;
+						console.log(
+							'Downloading ' +
+								((100.0 * dowloaded) / len).toFixed(2) +
+								'% ' +
+								dowloaded +
+								' bytes' +
+								'\r'
+						);
+					})
+					.on('end', () => {
+						file.end();
+						resolve(null);
+					})
+					.on('error', err => {
+						reject(err.message);
+					});
+			})
+			.on('error', err => {
+				fs.unlink(dest);
+				reject(err.message);
+			});
 	});
 }
 

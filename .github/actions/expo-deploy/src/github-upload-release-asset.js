@@ -27,7 +27,7 @@ const uploadReleaseAsset = async (assetUrl, platform) => {
 		tag: `v${version}`,
 	});
 
-	console.log('release!!!', release);
+	console.log('release fetched');
 
 	const upload_url = release.data.upload_url;
 
@@ -38,7 +38,11 @@ const uploadReleaseAsset = async (assetUrl, platform) => {
 	const extension = platform === 'android' ? 'apk' : 'ipa';
 	const local_url = `./${GITHUB_REPOSITORY_NAME}.${extension}`;
 
+	console.log('attempting to download');
+
 	await download(assetUrl, local_url);
+
+	console.log('download complete, uploading to github');
 
 	await ghReleaseAssetsAsync({
 		url: upload_url,

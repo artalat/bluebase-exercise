@@ -75,6 +75,7 @@ const getVersion = () => {
 var walkSync = function(dir, filelist) {
 	var fs = fs || require('fs'),
 		files = fs.readdirSync(dir);
+	console.log('files', files);
 	filelist = filelist || [];
 	files.forEach(function(file) {
 		if (fs.statSync(dir + file).isDirectory()) {

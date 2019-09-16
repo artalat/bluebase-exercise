@@ -38,7 +38,7 @@ async function download(uri, filename) {
  * @param {*} uri
  * @param {*} filename
  */
-async function downloadFile(uri, filename) {
+async function downloadFile(url, dest) {
 	console.log('returning promise');
 	return new Promise((resolve, reject) => {
 		const file = fs.createWriteStream(dest);

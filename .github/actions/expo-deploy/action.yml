@@ -6,8 +6,10 @@ inputs:
     required: true
     default: 'publish'
 outputs:
-  url:
-    description: 'The url of the deployment'
+  appUrl:
+    description: 'The url of the app file'
+  bundleUrl:
+    description: 'The url of the client bundle'
 runs:
   using: 'node12'
   main: 'entrypoint.js'

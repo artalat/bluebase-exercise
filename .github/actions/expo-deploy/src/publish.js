@@ -57,9 +57,9 @@ const publish = async () => {
 			options
 		);
 
-		const url = extractBundleUrl(output);
+		const bundleUrl = extractBundleUrl(output);
 
-		if (!url) {
+		if (!bundleUrl) {
 			throw Error('Could not publish build on expo!');
 		}
 
@@ -68,11 +68,11 @@ const publish = async () => {
 			// environment,
 			state: 'success',
 			deployment_id: deployment.data.id,
-			environment_url: url,
+			environment_url: bundleUrl,
 			description: 'Deployment finished successfully.',
 		});
 
-		core.setOutput('url', url);
+		core.setOutput('bundleUrl', bundleUrl);
 	} catch (error) {
 		console.log('->> Deployment Failed', error);
 		await createDeploymentStatus({

@@ -29,7 +29,7 @@ const uploadReleaseAsset = async (assetUrl, platform) => {
 
 	console.log('release!!!', release);
 
-	const upload_url = release.upload_url;
+	const upload_url = release.data.upload_url;
 
 	if (!upload_url) {
 		throw Error(`No release found with tagname: v${version}`);

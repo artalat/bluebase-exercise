@@ -5,11 +5,13 @@ const {
 	GITHUB_TOKEN,
 	REPO_DIRECTORY,
 } = require('./constants');
-const download = require('siwi-file');
+const download = require('siwi-file').file;
 const ghReleaseAssets = require('gh-release-assets');
 const fs = require('fs');
 const path = require('path');
 
+console.log('download', download);
+console.log('ghReleaseAssets', ghReleaseAssets);
 const uploadReleaseAsset = async (assetUrl, platform) => {
 	const event = await githubEvent();
 	const owner = event.repository.owner.login;

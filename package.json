@@ -1,6 +1,6 @@
 {
 	"name": "bluebase-exercise",
-	"version": "v0.0.1",
+	"version": "0.0.1",
 	"size-limit": [
 		{
 			"limit": "4 KB",

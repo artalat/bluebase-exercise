@@ -24,21 +24,21 @@ jobs:
         with:
           args: install
 
-      - name: Install BlueBase Web Plugin
-        uses: ./.github/actions/bluebase
-        with:
-          args: plugins:add @bluebase/cli-expo
+      # - name: Install BlueBase Web Plugin
+      #   uses: ./.github/actions/bluebase
+      #   with:
+      #     args: plugins:add @bluebase/cli-expo
 
-      - name: Build Expo
-        uses: ./.github/actions/bluebase
-        with:
-          args: expo:build
+      # - name: Build Expo
+      #   uses: ./.github/actions/bluebase
+      #   with:
+      #     args: expo:build
 
-      - name: Increase watchers
-        run: |
-          echo fs.inotify.max_user_instances=524288 | sudo tee -a /etc/sysctl.conf && sudo sysctl -p
-          echo fs.inotify.max_user_watches=524288 | sudo tee -a /etc/sysctl.conf && sudo sysctl -p
-          echo fs.inotify.max_queued_events=524288 | sudo tee -a /etc/sysctl.conf && sudo sysctl -p
+      # - name: Increase watchers
+      #   run: |
+      #     echo fs.inotify.max_user_instances=524288 | sudo tee -a /etc/sysctl.conf && sudo sysctl -p
+      #     echo fs.inotify.max_user_watches=524288 | sudo tee -a /etc/sysctl.conf && sudo sysctl -p
+      #     echo fs.inotify.max_queued_events=524288 | sudo tee -a /etc/sysctl.conf && sudo sysctl -p
 
       - name: Expo Deploy
         uses: ./.github/actions/expo-deploy

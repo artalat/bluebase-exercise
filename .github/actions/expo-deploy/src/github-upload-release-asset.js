@@ -27,8 +27,6 @@ const uploadReleaseAsset = async (assetUrl, platform) => {
 		tag: `v${version}`,
 	});
 
-	console.log('release fetched');
-
 	const upload_url = release.data.upload_url;
 
 	if (!upload_url) {
@@ -38,18 +36,25 @@ const uploadReleaseAsset = async (assetUrl, platform) => {
 	const extension = platform === 'android' ? 'apk' : 'ipa';
 	const local_url = `${REPO_DIRECTORY}/${GITHUB_REPOSITORY_NAME}.${extension}`;
 
-	console.log(`attempting to download file at: ${local_url}`);
+	console.log(`Attempting to download file at: ${local_url}`);
 
 	await download(assetUrl, local_url);
 
-	console.log('download complete, uploading to github');
+	console.log('Download complete, uploading to GitHub');
 
 	// walkSync(REPO_DIRECTORY);
 	await ghReleaseAssetsAsync({
 		url: upload_url,
 		token: [GITHUB_TOKEN],
-		assets: [local_url],
+		assets: [
+			{
+				name: platform === 'android' ? 'Android App' : 'iOS App',
+				path: local_url,
+			},
+		],
 	});
+
+	console.log('GitHub Upload Complete');
 };
 
 const ghReleaseAssetsAsync = async opts => {
@@ -70,23 +75,5 @@ const getVersion = () => {
 
 	return pkg.version;
 };
-
-// // List all files in a directory in Node.js recursively in a synchronous fashion
-// var walkSync = function(dir, filelist) {
-// 	var fs = fs || require('fs'),
-// 		files = fs.readdirSync(dir);
-// 	console.log('files', files);
-// 	filelist = filelist || [];
-// 	files.forEach(function(file) {
-// 		if (fs.statSync(dir + file).isDirectory()) {
-// 			filelist = walkSync(dir + file + '/', filelist);
-// 		} else {
-// 			filelist.push(file);
-// 		}
-// 	});
-
-// 	console.log(filelist);
-// 	return filelist;
-// };
 
 module.exports = uploadReleaseAsset;

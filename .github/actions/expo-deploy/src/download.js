@@ -7,22 +7,17 @@ const https = require('https');
  * @param {*} filename
  */
 async function download(uri, filename) {
-	console.log('returning promise');
 	return new Promise((resolve, reject) => {
-		console.log('inside promise');
-
 		https
 			.get(uri, function(response) {
 				if (response.statusCode >= 200 && response.statusCode < 300) {
-					console.log('now downloading', uri);
 					downloadFile(uri, filename)
 						.then(resolve)
 						.catch(reject);
 				} else if (response.headers.location) {
-					console.log('whoops we were redirected', response.headers.location);
+					console.log('Path redirected to: ', response.headers.location);
 					resolve(download(response.headers.location, filename));
 				} else {
-					console.log('download error', response.statusMessage);
 					reject(new Error(response.statusCode + ' ' + response.statusMessage));
 				}
 			})
@@ -36,19 +31,18 @@ async function download(uri, filename) {
  * @param {*} filename
  */
 async function downloadFile(url, dest) {
-	console.log('returning promise');
 	return new Promise((resolve, reject) => {
 		const file = fs.createWriteStream(dest);
 
 		https
 			.get(url, res => {
 				if (res.statusCode !== 200) {
-					return callback('File is not found');
+					return reject('File is not found');
 				}
 
-				const len = parseInt(res.headers['content-length'], 10);
+				// const len = parseInt(res.headers['content-length'], 10);
 
-				let dowloaded = 0;
+				// let dowloaded = 0;
 
 				res.pipe(file);
 				res

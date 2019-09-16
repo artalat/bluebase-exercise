@@ -6,9 +6,9 @@ on:
   push:
     # Sequence of patterns matched against refs/heads
     branches:
-      - '*' # Push events on all branchs
-      # - '!master' # Exclude master
-      # - '!staging' # Exclude staging
+      # - '*' # Push events on all branchs
+      - '!master' # Exclude master
+      - '!staging' # Exclude staging
 
 jobs:
   test:

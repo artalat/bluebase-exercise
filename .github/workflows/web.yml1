@@ -36,8 +36,6 @@ jobs:
 
       - name: Now Deploy
         uses: BlueBaseJS/now-deploy-github-action@master
-        # with:
-        #   args: plugins:add @bluebase/cli-web
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NOW_TOKEN: ${{ secrets.ZEIT_TOKEN }}

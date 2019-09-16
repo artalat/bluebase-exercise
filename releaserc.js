@@ -26,6 +26,6 @@ module.exports = {
 			},
 		],
 		'@semantic-release/github',
-		// "@qiwi/semantic-release-gh-pages-plugin"
+		'@qiwi/semantic-release-gh-pages-plugin',
 	],
 };

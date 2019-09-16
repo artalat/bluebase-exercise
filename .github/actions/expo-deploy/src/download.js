@@ -1,8 +1,5 @@
-var url = require('url');
 const fs = require('fs');
 const https = require('https');
-const path = require('path');
-const parseUrl = require('url').parse;
 
 /**
  * Downloads a file from a url. Follows redirects if required

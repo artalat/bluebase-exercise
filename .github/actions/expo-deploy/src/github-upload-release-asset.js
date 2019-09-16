@@ -36,7 +36,7 @@ const uploadReleaseAsset = async (assetUrl, platform) => {
 	}
 
 	const extension = platform === 'android' ? 'apk' : 'ipa';
-	const local_url = `./${GITHUB_REPOSITORY_NAME}.${extension}`;
+	const local_url = `${REPO_DIRECTORY}/${GITHUB_REPOSITORY_NAME}.${extension}`;
 
 	console.log('attempting to download');
 

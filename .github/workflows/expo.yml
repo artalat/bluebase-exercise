@@ -41,7 +41,8 @@ jobs:
           echo fs.inotify.max_queued_events=524288 | sudo tee -a /etc/sysctl.conf && sudo sysctl -p
 
       - name: Expo Deploy
-        uses: ./.github/actions/expo-deploy
+        # uses: ./.github/actions/expo-deploy
+        uses: BlueBaseJS/expo-deploy-github-action@master
         # with:
         #   args: plugins:add @bluebase/cli-web
         env:

@@ -46,17 +46,17 @@ async function downloadFile(url, dest) {
 
 				res.pipe(file);
 				res
-					.on('data', chunk => {
-						dowloaded += chunk.length;
-						// console.log(
-						// 	'Downloading ' +
-						// 		((100.0 * dowloaded) / len).toFixed(2) +
-						// 		'% ' +
-						// 		dowloaded +
-						// 		' bytes' +
-						// 		'\r'
-						// );
-					})
+					// .on('data', chunk => {
+					// 	dowloaded += chunk.length;
+					// 	console.log(
+					// 		'Downloading ' +
+					// 			((100.0 * dowloaded) / len).toFixed(2) +
+					// 			'% ' +
+					// 			dowloaded +
+					// 			' bytes' +
+					// 			'\r'
+					// 	);
+					// })
 					.on('end', () => {
 						file.end();
 						resolve(null);

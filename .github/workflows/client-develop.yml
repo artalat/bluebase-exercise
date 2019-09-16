@@ -7,7 +7,8 @@ on:
   push:
     # Sequence of patterns matched against refs/heads
     branches:
-      - 'refs/heads/*' # Push events on all branchs
+      - '*' # Push events on all branchs
+      # - 'refs/heads/*' # Push events on all branchs
       # - '!refs/heads/master' # Exclude master
       # - '!staging' # Exclude staging
 

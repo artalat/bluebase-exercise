@@ -44,7 +44,7 @@ const uploadReleaseAsset = async (assetUrl, platform) => {
 
 	console.log('download complete, uploading to github');
 
-	walkSync(REPO_DIRECTORY);
+	// walkSync(REPO_DIRECTORY);
 	await ghReleaseAssetsAsync({
 		url: upload_url,
 		token: [GITHUB_TOKEN],
@@ -71,22 +71,22 @@ const getVersion = () => {
 	return pkg.version;
 };
 
-// List all files in a directory in Node.js recursively in a synchronous fashion
-var walkSync = function(dir, filelist) {
-	var fs = fs || require('fs'),
-		files = fs.readdirSync(dir);
-	console.log('files', files);
-	filelist = filelist || [];
-	files.forEach(function(file) {
-		if (fs.statSync(dir + file).isDirectory()) {
-			filelist = walkSync(dir + file + '/', filelist);
-		} else {
-			filelist.push(file);
-		}
-	});
+// // List all files in a directory in Node.js recursively in a synchronous fashion
+// var walkSync = function(dir, filelist) {
+// 	var fs = fs || require('fs'),
+// 		files = fs.readdirSync(dir);
+// 	console.log('files', files);
+// 	filelist = filelist || [];
+// 	files.forEach(function(file) {
+// 		if (fs.statSync(dir + file).isDirectory()) {
+// 			filelist = walkSync(dir + file + '/', filelist);
+// 		} else {
+// 			filelist.push(file);
+// 		}
+// 	});
 
-	console.log(filelist);
-	return filelist;
-};
+// 	console.log(filelist);
+// 	return filelist;
+// };
 
 module.exports = uploadReleaseAsset;

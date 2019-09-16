@@ -54,14 +54,14 @@ async function downloadFile(url, dest) {
 				res
 					.on('data', chunk => {
 						dowloaded += chunk.length;
-						console.log(
-							'Downloading ' +
-								((100.0 * dowloaded) / len).toFixed(2) +
-								'% ' +
-								dowloaded +
-								' bytes' +
-								'\r'
-						);
+						// console.log(
+						// 	'Downloading ' +
+						// 		((100.0 * dowloaded) / len).toFixed(2) +
+						// 		'% ' +
+						// 		dowloaded +
+						// 		' bytes' +
+						// 		'\r'
+						// );
 					})
 					.on('end', () => {
 						file.end();

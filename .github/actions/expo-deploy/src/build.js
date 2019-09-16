@@ -4,7 +4,7 @@ const {
 	EXPO_CLI_PASSWORD,
 } = require('./constants');
 const exec = require('@actions/exec');
-const { extractAppFileUrl, extractBundleUrl } = require('./extract-appUrl');
+const { extractAppFileUrl, extractBundleUrl } = require('./extract-url');
 const uploadReleaseAsset = require('./github-upload-release-asset');
 const core = require('@actions/core');
 

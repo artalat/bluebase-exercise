@@ -25,12 +25,12 @@ jobs:
           args: install
 
       - name: Install BlueBase Web Plugin
-        uses: ./.github/actions/bluebase
+        uses: BlueBaseJS/bluebase-github-action@master
         with:
           args: plugins:add @bluebase/cli-expo
 
       - name: Build Expo
-        uses: ./.github/actions/bluebase
+        uses: BlueBaseJS/bluebase-github-action@master
         with:
           args: expo:build
 

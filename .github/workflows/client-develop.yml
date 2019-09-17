@@ -2,16 +2,21 @@
 
 name: Development CI
 
-# on: [push]
 on:
   push:
-    # Sequence of patterns matched against refs/heads
     branches:
-      # - '*' # Push events on all branchs
-      - 'feature/test'
-      # - 'refs/heads/*' # Push events on all branchs
-      # - '!refs/heads/master' # Exclude master
-      # - '!staging' # Exclude staging
+      - '*'
+
+# # on: [push]
+# on:
+#   push:
+#     # Sequence of patterns matched against refs/heads
+#     branches:
+#       - '*' # Push events on all branchs
+#       # - 'feature/test'
+#       # - 'refs/heads/*' # Push events on all branchs
+#       # - '!refs/heads/master' # Exclude master
+#       # - '!staging' # Exclude staging
 
 jobs:
   test:

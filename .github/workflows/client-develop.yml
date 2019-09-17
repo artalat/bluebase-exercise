@@ -1,0 +1,133 @@
+# Used on master and staging branches
+
+name: Development CI
+
+on:
+  push:
+    # Sequence of patterns matched against refs/heads
+    branches:
+      - '*' # Push events on all branchs
+      - '*/*'
+      - '!master' # Exclude master
+
+jobs:
+  test:
+    name: Test, Build & Release
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [12]
+
+    steps:
+      - uses: actions/checkout@v1
+
+      # - name: Setup Node.js
+      #   uses: actions/setup-node@v1
+      #   with:
+      #     node-version: ${{ matrix.node-version }}
+
+      - name: Install Dependencies
+        uses: Borales/actions-yarn@master
+        with:
+          args: install
+
+      # - name: Jest
+      #   uses: docker://rkusa/jest-action:latest
+      #   env:
+      #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      #   with:
+      #     args: --coverage --logHeapUsage
+
+      - name: Unit Tests (Jest)
+        uses: Borales/actions-yarn@master
+        with:
+          args: test:only --coverage --logHeapUsage --ci
+
+      - name: Test Lint
+        uses: Borales/actions-yarn@master
+        with:
+          args: test:lint
+
+      - name: Test Prettier
+        uses: Borales/actions-yarn@master
+        with:
+          args: test:prettier
+
+      - name: Build
+        uses: Borales/actions-yarn@master
+        with:
+          args: build
+
+  web-deploy:
+    name: Deploy Web
+    needs: test
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [12]
+
+    steps:
+      - uses: actions/checkout@v1
+
+      - name: Install Dependencies
+        uses: Borales/actions-yarn@master
+        with:
+          args: install
+
+      - name: Install BlueBase Web Plugin
+        uses: BlueBaseJS/bluebase-github-action@master
+        with:
+          args: plugins:add @bluebase/cli-web
+
+      - name: Build Web
+        uses: BlueBaseJS/bluebase-github-action@master
+        with:
+          args: web:build --static
+
+      - name: Now Deploy
+        uses: BlueBaseJS/now-deploy-github-action@master
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          NOW_TOKEN: ${{ secrets.ZEIT_TOKEN }}
+
+  expo-publish:
+    name: Expo Publish
+    needs: test
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [12]
+
+    steps:
+      - uses: actions/checkout@v1
+
+      - name: Install Dependencies
+        uses: Borales/actions-yarn@master
+        with:
+          args: install
+
+      - name: Install BlueBase Web Plugin
+        uses: BlueBaseJS/bluebase-github-action@master
+        with:
+          args: plugins:add @bluebase/cli-expo
+
+      - name: Build Expo
+        uses: BlueBaseJS/bluebase-github-action@master
+        with:
+          args: expo:build
+
+      - name: Increase watchers
+        run: |
+          echo fs.inotify.max_user_instances=524288 | sudo tee -a /etc/sysctl.conf && sudo sysctl -p
+          echo fs.inotify.max_user_watches=524288 | sudo tee -a /etc/sysctl.conf && sudo sysctl -p
+          echo fs.inotify.max_queued_events=524288 | sudo tee -a /etc/sysctl.conf && sudo sysctl -p
+
+      - name: Expo Deploy
+        uses: BlueBaseJS/expo-deploy-github-action@master
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          EXPO_CLI_USERNAME: ${{ secrets.EXPO_CLI_USERNAME }}
+          EXPO_CLI_PASSWORD: ${{ secrets.EXPO_CLI_PASSWORD }}

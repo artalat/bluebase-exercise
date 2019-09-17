@@ -1,0 +1,41 @@
+name: Web Debug
+
+on: [push]
+
+jobs:
+  test:
+    name: Test
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [12]
+
+    steps:
+      - uses: actions/checkout@v1
+
+      # - name: Setup Node.js
+      #   uses: actions/setup-node@v1
+      #   with:
+      #     node-version: ${{ matrix.node-version }}
+
+      - name: Install Dependencies
+        uses: Borales/actions-yarn@master
+        with:
+          args: install
+
+      - name: Install BlueBase Web Plugin
+        uses: BlueBaseJS/bluebase-github-action@master
+        with:
+          args: plugins:add @bluebase/cli-web
+
+      - name: Build Web
+        uses: BlueBaseJS/bluebase-github-action@master
+        with:
+          args: web:build --static
+
+      - name: Now Deploy
+        uses: BlueBaseJS/now-deploy-github-action@master
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          NOW_TOKEN: ${{ secrets.ZEIT_TOKEN }}

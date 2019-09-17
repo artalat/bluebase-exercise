@@ -1,0 +1,13 @@
+name: 'Now Deploy'
+description: 'Deploys a project to Now'
+# inputs:
+#   who-to-greet: # id of input
+#     description: 'Who to greet'
+#     required: true
+#     default: 'World'
+outputs:
+  url:
+    description: 'The url of the deployment'
+runs:
+  using: 'node12'
+  main: 'entrypoint.js'

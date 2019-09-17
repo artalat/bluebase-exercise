@@ -1,0 +1,51 @@
+name: Expo Build Android Debug
+
+on: [push]
+
+jobs:
+  test:
+    name: Test
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [12]
+
+    steps:
+      - uses: actions/checkout@v1
+
+      # - name: Setup Node.js
+      #   uses: actions/setup-node@v1
+      #   with:
+      #     node-version: ${{ matrix.node-version }}
+
+      - name: Install Dependencies
+        uses: Borales/actions-yarn@master
+        with:
+          args: install
+
+      - name: Install BlueBase Expo Plugin
+        uses: BlueBaseJS/bluebase-github-action@master
+        with:
+          args: plugins:add @bluebase/cli-expo
+
+      - name: Build Expo
+        uses: BlueBaseJS/bluebase-github-action@master
+        with:
+          args: expo:build
+
+      - name: Increase watchers
+        run: |
+          echo fs.inotify.max_user_instances=524288 | sudo tee -a /etc/sysctl.conf && sudo sysctl -p
+          echo fs.inotify.max_user_watches=524288 | sudo tee -a /etc/sysctl.conf && sudo sysctl -p
+          echo fs.inotify.max_queued_events=524288 | sudo tee -a /etc/sysctl.conf && sudo sysctl -p
+
+      - name: Expo Deploy
+        # uses: ./.github/actions/expo-deploy
+        uses: BlueBaseJS/expo-deploy-github-action@master
+        with:
+          command: build:android
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          EXPO_CLI_USERNAME: ${{ secrets.EXPO_CLI_USERNAME }}
+          EXPO_CLI_PASSWORD: ${{ secrets.EXPO_CLI_PASSWORD }}

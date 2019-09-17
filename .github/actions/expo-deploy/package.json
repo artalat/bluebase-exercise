@@ -1,0 +1,13 @@
+{
+	"name": "bluebase-action-expo-deployment",
+	"dependencies": {
+		"@actions/core": "^1.1.0",
+		"@actions/exec": "^1.0.1",
+		"@actions/github": "^1.1.0",
+		"expo-cli": "^3.0.10",
+		"gh-release-assets": "^1.1.2",
+		"humanize": "^0.0.9",
+		"siwi-file": "^1.0.3",
+		"slugify": "^1.3.5"
+	}
+}

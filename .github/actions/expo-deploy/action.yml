@@ -1,0 +1,15 @@
+name: 'Now Deploy'
+description: 'Deploys a project to Now'
+inputs:
+  command: # id of input
+    description: 'Expo Command to execute'
+    required: true
+    default: 'publish'
+outputs:
+  appUrl:
+    description: 'The url of the app file'
+  bundleUrl:
+    description: 'The url of the client bundle'
+runs:
+  using: 'node12'
+  main: 'entrypoint.js'

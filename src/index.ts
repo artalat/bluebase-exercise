@@ -1,14 +1,12 @@
 import { HelloScreen } from './components/HelloScreen';
-import { createPlugin, BootOptions, BlueBase } from '@bluebase/core';
-import { withBackground } from './hocs/withBackground';
+import { createPlugin } from '@bluebase/core';
 
 export default createPlugin({
-
 	key: 'hello-world',
 	name: 'Hello World',
 
 	components: {
-		HomeScreen: HelloScreen
+		HomeScreen: HelloScreen,
 	},
 
 	// filters: {
